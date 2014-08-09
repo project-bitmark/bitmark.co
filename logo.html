@@ -36,10 +36,15 @@
         width: 2em;
       }
       
+      a.give {
+        background-image: url(images/concept/give/bitmark-logo.png);
+      }
+      a.pay {
+        background-image: url(images/concept/buy/bitmark-logo.png);
+      }      
       a.markable, a.marked {
         background-size: 90px 90px;
         background-position: top right;
-        background-image: url(images/concept/give/bitmark-logo.png);
         background-repeat: no-repeat;
         height: 128px;
         width: 128px;
@@ -61,8 +66,16 @@
       a.markable:active img, a.marked img {
         opacity: 0;
       }
-      a.markable .amount, a.marked .amount {
+      a.give .amount, a.marked .amount {
         opacity: 0;
+        position: absolute;
+        top: 53px;
+        left: 60px;
+        z-index: 100;
+        color: #070707;
+      }
+      a.pay .amount {
+        opacity: 1;
         position: absolute;
         top: 53px;
         left: 60px;
@@ -86,13 +99,13 @@
         -ms-transform:rotate(315deg);
         -webkit-transform:rotate(315deg);
       }
-      a.markable:active .amount, a.marked .amount {
+      a.give:active .amount, a.marked .amount {
         opacity: 1;
         left: 44px;
       }
     </style>
     <script>
-    function startMarking() {
+    function startGiving() {
     	var timer, mark = $(this); amount = (Math.floor($('.amount', mark).text()*100) / 100);
     	$('.amount', mark).text(amount);
     	function pulsate() {
@@ -116,10 +129,24 @@
     	}, 750);
     	return false;
     }
+    
+    function startPaying() {
+    	var timer, mark = $(this); amount = (Math.floor($('.amount', mark).text()*100) / 100);
+    	$('.amount', mark).text("...");
+    	mark.mouseup(function() {
+    		clearInterval(timer); 
+    	});
+    	timer = setTimeout(function() {
+    	  mark.addClass('marked').removeClass('markable');
+    	  $('.amount', mark).text(amount + " Paid");
+    	}, 1000);
+    	return false;
+    }
 
     //should only be called after the window/DOM has been loaded
     $(document).ready(function() {
-    	$('.markable').mousedown(startMarking);
+    	$('.markable.give').mousedown(startGiving);
+    	$('.markable.pay').mousedown(startPaying);
     });
     
     </script>
@@ -137,7 +164,7 @@
       <hr>
 
       <div class="row try">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-5 col-md-offset-1">
           <div class="pull-left">
             <a href="#" class="markable give">
               <img src="images/concept/give/bitmark-plus.png" class="img-responsive">
@@ -145,9 +172,22 @@
             </a>
           </div>
           <div class="col-md-8">
-            <p class="lead">Select and hold to mark.<br>Hold longer to mark more<br>Hold again to mark even more</p>
+            <p class="lead"><strong>Giving</strong><br>Select and hold to mark.<br>Hold longer to mark more<br>Hold again to mark even more</p>
           </div>
         </div>
+        
+        <div class="col-md-5">
+          <div class="pull-left">
+            <a href="#" class="markable pay">
+              <img src="images/concept/buy/bitmark-plus.png" class="img-responsive">
+              <span class="amount">2.99</span>
+            </a>
+          </div>
+          <div class="col-md-8">
+            <p class="lead"><strong>Paying</strong><br>Select and hold.<br>Payments have a fixed cost.</p>
+          </div>
+        </div>
+        
       </div>
 
       <hr>
