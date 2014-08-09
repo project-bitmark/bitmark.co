@@ -135,7 +135,7 @@
     	$('.amount', mark).text("...");
     	mark.mouseup(function() {
     		clearInterval(timer);
-    		$('.amount', mark).text(amount);
+    		if(mark.hasClass('markable')) $('.amount', mark).text(amount);
     	});
     	timer = setTimeout(function() {
     	  mark.unbind('mousedown');
