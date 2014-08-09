@@ -137,6 +137,7 @@
     		clearInterval(timer); 
     	});
     	timer = setTimeout(function() {
+    	  mark.unbind('mousedown');
     	  mark.addClass('marked').removeClass('markable');
     	  $('.amount', mark).text(amount + " Paid");
     	}, 1000);
