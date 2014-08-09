@@ -134,7 +134,8 @@
     	var timer, mark = $(this); amount = (Math.floor($('.amount', mark).text()*100) / 100);
     	$('.amount', mark).text("...");
     	mark.mouseup(function() {
-    		clearInterval(timer); 
+    		clearInterval(timer);
+    		$('.amount', mark).text(amount);
     	});
     	timer = setTimeout(function() {
     	  mark.unbind('mousedown');
