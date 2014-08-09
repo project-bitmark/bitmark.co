@@ -95,9 +95,14 @@
     function startMarking() {
     	var timer, mark = $(this); amount = (Math.floor($('.amount', mark).text()*100) / 100);
     	$('.amount', mark).text(amount);
-    	mark.mouseup(function() { clearInterval(timer);	});
+    	function pulsate() {
+    		mark.animate({ opacity: 0.6 }, 500, 'linear')
+            .animate({ opacity: 1 }, 500, 'linear', pulsate);
+    	}
+    	mark.mouseup(function() { clearInterval(timer); mark.animate({ opacity: 0.9 }, 500, 'linear'); mark.stop();	});
     	timer = setTimeout(function() {
     	  mark.addClass('marked').removeClass('markable');
+    	  pulsate();
     	  timer = setTimeout(function() {
         	timer = setInterval(function() {
         	  amount += 0.01;
@@ -126,8 +131,26 @@
         </p>
       </div>
       <hr>
+
+      <div class="row try">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="pull-left">
+            <a href="#" class="markable give">
+              <img src="images/concept/give/bitmark-plus.png" class="img-responsive">
+              <span class="amount">0.010000</span>
+            </a>
+          </div>
+          <div class="col-md-8">
+            <p class="lead">Press and hold to mark.<br>Hold longer to mark more<br>Repeat to mark even more</p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      
       <div class="row">
         <div class="col-md-12">
+        <h3>Elements of the Composition</h3>
         <ul class="list-inline">
           <li>lower case 'b' to represent 'bitmark'</li>
           <li>dual case 'M' at 45° to represent 'mark'</li>
@@ -137,22 +160,6 @@
         </ul>
         </div>
       </div>
-      <hr>
-      <div class="row try">
-
-        <div class="col-md-6 col-md-offset-3">
-          <div class="pull-left">
-            <a href="#" class="markable give">
-              <img src="images/concept/give/bitmark-plus.png" class="img-responsive">
-              <span class="amount">0.010000</span>
-            </a>
-          </div>
-          <div class="col-md-8">
-            <p class="lead">Press and hold to mark.<br>Hold longer to mark more<br>Do it again to mark even more</p>
-          </div>
-        </div>
-      </div>
-      <hr>
       <div class="row outline">
         <div class="col-md-4">
           <h2>Dual Logo Concept</h2>
