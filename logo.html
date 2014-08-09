@@ -96,7 +96,7 @@
     	var timer, mark = $(this); amount = (Math.floor($('.amount', mark).text()*100) / 100);
     	$('.amount', mark).text(amount);
     	function pulsate() {
-    		mark.animate({ opacity: 0.6 }, 500, 'linear')
+    		mark.animate({ opacity: 0.75 }, 500, 'linear')
             .animate({ opacity: 1 }, 500, 'linear', pulsate);
     	}
     	mark.mouseup(function() { clearInterval(timer); mark.animate({ opacity: 0.9 }, 500, 'linear'); mark.stop();	});
