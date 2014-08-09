@@ -99,10 +99,14 @@
     		mark.animate({ opacity: 0.75 }, 500, 'linear')
             .animate({ opacity: 1 }, 500, 'linear', pulsate);
     	}
-    	mark.mouseup(function() { clearInterval(timer); mark.animate({ opacity: 0.9 }, 500, 'linear'); mark.stop();	});
+    	mark.mouseup(function() {
+    		clearInterval(timer); 
+    		//mark.animate({ opacity: 0.9 }, 500, 'linear'); 
+    		//mark.stop();	
+    	});
     	timer = setTimeout(function() {
     	  mark.addClass('marked').removeClass('markable');
-    	  pulsate();
+    	  //pulsate();
     	  timer = setTimeout(function() {
         	timer = setInterval(function() {
         	  amount += 0.01;
